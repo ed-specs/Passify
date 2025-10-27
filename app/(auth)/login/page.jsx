@@ -2,11 +2,11 @@ import Link from "next/link";
 
 export default function SignIn() {
   return (
-    <div className="min-h-dvh p-4 flex items-center justify-center text-sm">
-      <div className="p-2 flex flex-col gap-6 w-full">
+    <div className="min-h-dvh p-4 flex items-center justify-center text-sm sm:text-base ">
+      <div className="p-2 flex flex-col gap-6 w-full max-w-md">
         {/* Title */}
         <div className="flex flex-col items-center justify-center gap-1 text-center">
-          <h1 className="text-xl font-bold">Welcome to Passify</h1>
+          <h1 className="text-xl sm:text-2xl font-bold">Welcome to Passify</h1>
           <span className="text-gray-500 ">Sign in to your account</span>
         </div>
         {/* Validation message here. either red or green depending on the message */}
@@ -21,7 +21,7 @@ export default function SignIn() {
             </label>
             <input
               type="email"
-              className="px-3 py-2 rounded-md border border-gray-300 outline-none focus:border-green-500 transition-colors duration-150 placeholder:text-gray-500"
+              className="px-4 py-2 rounded-md border border-gray-300 outline-none focus:border-green-500 transition-colors duration-150 placeholder:text-gray-500"
               placeholder="Enter your email address"
             />
           </div>
@@ -37,12 +37,12 @@ export default function SignIn() {
             </div>
             <input
               type="password"
-              className="px-3 py-2 rounded-md border border-gray-300 outline-none focus:border-green-500 transition-colors duration-150 placeholder:text-gray-500"
+              className="px-4 py-2 rounded-md border border-gray-300 outline-none focus:border-green-500 transition-colors duration-150 placeholder:text-gray-500"
               placeholder="Enter your password"
             />
           </div>
 
-          <button className=" bg-green-500 active:bg-green-600 rounded-full px-4 py-2 text-center text-white">
+          <button className=" bg-green-500 hover:bg-green-500/90 active:bg-green-600 transition-colors duration-150 cursor-pointer rounded-full px-4 py-2 text-center text-white">
             Sign in
           </button>
         </form>
@@ -52,13 +52,13 @@ export default function SignIn() {
 
         {/* buttons */}
         <div className="flex flex-col gap-2">
-          <button className=" border border-gray-300 px-4 py-2 rounded-full flex items-center justify-center gap-4 transition-colors duration-150 active:bg-gray-100">
+          <button className=" border border-gray-300 px-4 py-2 hover:bg-gray-50 active:bg-gray-100 rounded-full flex items-center justify-center gap-4 transition-colors duration-150 cursor-pointer">
             {/* logo */}
             <span>Sign in with Google</span>
           </button>
           <Link
             href="/create-account"
-            className=" border border-gray-300 px-4 py-2 rounded-full flex items-center justify-center gap-4 transition-colors duration-150 active:bg-gray-100"
+            className=" border border-gray-300 px-4 py-2 hover:bg-gray-50 active:bg-gray-100 rounded-full flex items-center justify-center gap-4 transition-colors duration-150 cursor-pointer"
           >
             {/* logo */}
             <span>Create account</span>
