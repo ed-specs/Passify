@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Verify() {
   return (
-    <div className="min-h-screen p-4 flex items-center justify-center">
+    <div className="min-h-dvh p-4 flex items-center justify-center">
       <div className="p-2 flex flex-col gap-6 w-full">
         {/* Title */}
         <div className="flex flex-col items-center justify-center gap-2 text-center">
