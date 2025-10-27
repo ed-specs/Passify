@@ -64,11 +64,27 @@ export default function ResetPassword() {
 
             <div className="bg-gray-100 rounded-md flex flex-col gap-2 p-4 text-xs sm:text-sm mt-1">
               <ul className="">
-                <li className="text-gray-500">• At least 12 characters</li>
-                <li className="text-gray-500">• One uppercase letter</li>
-                <li className="text-gray-500">• One lowercase letter</li>
-                <li className="text-gray-500">• One number</li>
-                <li className="text-gray-500">• One special character</li>
+                <li className="text-gray-500">
+                  • Minimum{" "}
+                  <span className="font-medium">
+                    12 characters (or more, e.g., 16)
+                  </span>
+                </li>
+                <li className="text-gray-500">
+                  • Contains an{" "}
+                  <span className="font-medium">uppercase letter</span>
+                </li>
+                <li className="text-gray-500">
+                  • Contains a{" "}
+                  <span className="font-medium">lowercase letter</span>
+                </li>
+                <li className="text-gray-500">
+                  • Contains a <span className="font-medium">number</span>
+                </li>
+                <li className="text-gray-500">
+                  • Contains a{" "}
+                  <span className="font-medium">symbol (e.g., @, !, #)</span>
+                </li>
               </ul>
             </div>
           </div>
