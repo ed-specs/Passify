@@ -101,7 +101,6 @@ export default function CreateAccount() {
     let newErrors = {};
     let isValid = true;
 
-    // ... (Validation logic remains the same) ...
     if (!formData.firstName.trim()) {
       newErrors.firstName = "First name is required.";
       isValid = false;
@@ -342,7 +341,7 @@ export default function CreateAccount() {
               <button
                 type="button"
                 onClick={togglePasswordVisibility}
-                className={`absolute top-0 right-3 sm:right-4 h-full text-gray-500 transition-colors duration-150 ${
+                className={`absolute top-2 right-3 sm:right-4 text-gray-500 transition-colors duration-150 ${
                   isLoading
                     ? "bg-gray-100 cursor-not-allowed"
                     : "hover:text-blue-600"
@@ -441,7 +440,7 @@ export default function CreateAccount() {
               <button
                 type="button"
                 onClick={toggleConfirmPasswordVisibility}
-                className={`absolute top-0 right-3 sm:right-4 h-full text-gray-500 transition-colors duration-150 ${
+                className={`absolute top-2 right-3 sm:right-4 text-gray-500 transition-colors duration-150 ${
                   isLoading
                     ? "bg-gray-100 cursor-not-allowed"
                     : "hover:text-blue-600"
@@ -468,7 +467,7 @@ export default function CreateAccount() {
               type="submit"
               disabled={isLoading}
               className={`
-                transition-colors duration-150 rounded-full px-4 py-2 text-center text-white mt-2 font-semibold cursor-pointer flex items-center justify-center gap-2
+                transition-colors duration-150 rounded-full px-4 py-2 text-center text-white mt-2 cursor-pointer flex items-center justify-center gap-2
                 ${
                   isLoading
                     ? "bg-blue-700 border-blue-700 cursor-not-allowed" // Loading state styles
@@ -482,20 +481,20 @@ export default function CreateAccount() {
               </span>
             </button>
             <Link
-              href="/login"
-              className={`
-                border rounded-full px-4 py-2 flex items-center justify-center gap-4 transition-colors duration-150 cursor-pointer text-gray-700 font-medium
-                ${
-                  isLoading
-                    ? "bg-gray-100 border-gray-300 cursor-not-allowed pointer-events-none"
-                    : "border-gray-300 hover:bg-gray-50 active:bg-gray-100"
-                }
-              `}
-              aria-disabled={isLoading}
-              tabIndex={isLoading ? -1 : 0}
-            >
-              <span>Back to sign in</span>
-            </Link>
+            href="/login"
+            className={`
+              border border-gray-300 px-4 py-2 rounded-full flex items-center justify-center gap-4 transition-colors duration-150 font-medium
+               ${
+                 isLoading
+                   ? "bg-gray-100 cursor-not-allowed text-gray-500"
+                   : "hover:bg-gray-50 active:bg-gray-100 cursor-pointer text-gray-700"
+               }
+            `}
+            aria-disabled={isLoading}
+            tabIndex={isLoading ? -1 : 0}
+          >
+            <span>Back to sign in</span>
+          </Link>
           </div>
         </form>
       </div>

@@ -49,7 +49,7 @@ export default function ResetPassword() {
               <button
                 type="button"
                 onClick={togglePasswordVisibility}
-                className="absolute top-0 right-3 sm:right-4 h-full active:text-blue-600 transition-colors duration-150"
+                className="absolute top-2 right-3 sm:right-4 active:text-blue-600 transition-colors duration-150"
               >
                 {showPassword ? (
                   <Eye className="size-5" />
@@ -102,7 +102,7 @@ export default function ResetPassword() {
               <button
                 type="button"
                 onClick={toggleConfirmPasswordVisibility}
-                className="absolute top-0 right-3 sm:right-4 h-full active:text-blue-600 transition-colors duration-150"
+                className="absolute top-2 right-3 sm:right-4 active:text-blue-600 transition-colors duration-150"
               >
                 {showConfirmPassword ? (
                   <Eye className="size-5" />
