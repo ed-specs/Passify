@@ -1,11 +1,5 @@
-// -- TYPOGRAPHY -- //
-TITLE:
-    Default     Mobile      Tablet      Laptop and up
-    text-xl     text-2xl    text-3xl    text-4xl
+TODO:
 
-SUB-TITLE
-    Default     Mobile      Tablet      Laptop and up
-    text-sm     text-sm     text-lg     text-lg
-
-         
-
+GENERAL:
+    - Password encryption. 
+    - Web pages security. Must be not accessible without authentication
