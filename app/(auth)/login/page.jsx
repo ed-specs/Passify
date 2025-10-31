@@ -18,10 +18,9 @@ import {
   updateDoc,
   signInWithEmailAndPassword,
   GoogleAuthProvider,
-  signInWithPopup,
   signInWithRedirect, // Re-introduce for mobile compatibility
   getRedirectResult, // To handle the callback result
-} from "firebase/auth";
+} from "firebase/firestore";
 
 export default function SignIn() {
   const router = useRouter();

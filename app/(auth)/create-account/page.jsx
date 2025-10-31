@@ -2,11 +2,8 @@
 
 import { useState, useMemo, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { auth, db } from "@/app/config/firebase"; // Assuming this path is correct
-import {
-  createUserWithEmailAndPassword,
-  sendEmailVerification,
-} from "firebase/auth"; // ADD sendEmailVerification
+import { auth, db } from "@/app/config/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import {
   MessageCircleWarning,
@@ -86,15 +83,6 @@ export default function CreateAccount() {
     }
   }, [areAllCriteriaMet, isPasswordFocused]);
 
-  // NEW: Email verification helper
-  const sendVerificationEmail = async (user) => {
-    try {
-      await sendEmailVerification(user);
-    } catch (error) {
-      console.error("Failed to send verification email:", error);
-    }
-  };
-
   // --- VALIDATION AND SUBMISSION ---
 
   const validateForm = () => {
@@ -159,22 +147,29 @@ export default function CreateAccount() {
       const user = userCredential.user;
 
       // 2. Send email verification link
-      await sendVerificationEmail(user);
+      await fetch("/api/send-verification-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          uid: user.uid,
+          email: formData.email,
+        }),
+      });
 
       // 3. Store additional user info in Firestore
       await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,
-        isVerified: true, // Initial verification status
+        isVerified: false, // Initial verification status
         createdAt: new Date(),
       });
 
       // 4. Success Feedback & Redirect
       setGlobalMessage({
         type: "success",
-        text:
-          "Account created successfully. Login to verify your account.",
+        text: "Account created successfully. Login to verify your account.",
       });
 
       setFormData({
@@ -481,8 +476,8 @@ export default function CreateAccount() {
               </span>
             </button>
             <Link
-            href="/login"
-            className={`
+              href="/login"
+              className={`
               border border-gray-300 px-4 py-2 rounded-full flex items-center justify-center gap-4 transition-colors duration-150
                ${
                  isLoading
@@ -490,11 +485,11 @@ export default function CreateAccount() {
                    : "hover:bg-gray-50 active:bg-gray-100 cursor-pointer text-gray-700"
                }
             `}
-            aria-disabled={isLoading}
-            tabIndex={isLoading ? -1 : 0}
-          >
-            <span>Back to sign in</span>
-          </Link>
+              aria-disabled={isLoading}
+              tabIndex={isLoading ? -1 : 0}
+            >
+              <span>Back to sign in</span>
+            </Link>
           </div>
         </form>
       </div>
