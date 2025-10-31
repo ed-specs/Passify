@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { auth, db } from "@/app/lib/firebase"; // Assuming this path is correct
+import { auth, db } from "@/app/config/firebase"; // Assuming this path is correct
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
@@ -166,7 +166,7 @@ export default function CreateAccount() {
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,
-        isVerified: false, // Initial verification status
+        isVerified: true, // Initial verification status
         createdAt: new Date(),
       });
 
@@ -174,7 +174,7 @@ export default function CreateAccount() {
       setGlobalMessage({
         type: "success",
         text:
-          "Account created! A verification link has been sent to your email.",
+          "Account created successfully. Login to verify your account.",
       });
 
       setFormData({
@@ -248,7 +248,7 @@ export default function CreateAccount() {
               globalMessageClasses[globalMessage.type]
             }`}
           >
-            <GlobalIcon className="size-4 sm:size-5" />
+            <GlobalIcon className="size-4 sm:size-8" />
             <span>{globalMessage.text}</span>
           </div>
         )}
@@ -341,7 +341,7 @@ export default function CreateAccount() {
               <button
                 type="button"
                 onClick={togglePasswordVisibility}
-                className={`absolute top-2 right-3 sm:right-4 text-gray-500 transition-colors duration-150 ${
+                className={`absolute top-2 sm:top-2.5 right-3 sm:right-4 text-gray-500 transition-colors duration-150 ${
                   isLoading
                     ? "bg-gray-100 cursor-not-allowed"
                     : "hover:text-blue-600"
@@ -349,9 +349,9 @@ export default function CreateAccount() {
                 disabled={isLoading}
               >
                 {showPassword ? (
-                  <EyeOff className="size-5" />
-                ) : (
                   <Eye className="size-5" />
+                ) : (
+                  <EyeOff className="size-5" />
                 )}
               </button>
             </div>
@@ -440,7 +440,7 @@ export default function CreateAccount() {
               <button
                 type="button"
                 onClick={toggleConfirmPasswordVisibility}
-                className={`absolute top-2 right-3 sm:right-4 text-gray-500 transition-colors duration-150 ${
+                className={`absolute top-2 sm:top-2.5 right-3 sm:right-4 text-gray-500 transition-colors duration-150 ${
                   isLoading
                     ? "bg-gray-100 cursor-not-allowed"
                     : "hover:text-blue-600"
@@ -448,9 +448,9 @@ export default function CreateAccount() {
                 disabled={isLoading}
               >
                 {showConfirmPassword ? (
-                  <EyeOff className="size-5" />
-                ) : (
                   <Eye className="size-5" />
+                ) : (
+                  <EyeOff className="size-5" />
                 )}
               </button>
             </div>
@@ -483,7 +483,7 @@ export default function CreateAccount() {
             <Link
             href="/login"
             className={`
-              border border-gray-300 px-4 py-2 rounded-full flex items-center justify-center gap-4 transition-colors duration-150 font-medium
+              border border-gray-300 px-4 py-2 rounded-full flex items-center justify-center gap-4 transition-colors duration-150
                ${
                  isLoading
                    ? "bg-gray-100 cursor-not-allowed text-gray-500"
