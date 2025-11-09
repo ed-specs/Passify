@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+<<<<<<< HEAD
+=======
+
+*.json
+!package.json
+!tsconfig.json
+firebase-adminsdk-*.json
+>>>>>>> clean-reset

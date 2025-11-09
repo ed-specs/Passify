@@ -5,9 +5,12 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { MessageCircleWarning, CircleCheckBig, Loader2 } from "lucide-react";
 
+<<<<<<< HEAD
 // Import Firebase Auth method
 import { auth } from "@/app/config/firebase";
 import { sendPasswordResetEmail } from "firebase/auth";
+=======
+>>>>>>> clean-reset
 
 export default function ForgotPassword() {
   const router = useRouter();
@@ -63,6 +66,7 @@ export default function ForgotPassword() {
     setIsLoading(true);
 
     try {
+<<<<<<< HEAD
       await sendPasswordResetEmail(auth, email);
 
       // Success or User-Not-Found: Use same message for security (no user enumeration)
@@ -92,6 +96,27 @@ export default function ForgotPassword() {
       } else {
         setGlobalMessage({ type: "error", text: errorMessage });
       }
+=======
+      const res = await fetch("/api/auth/forgot-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setGlobalMessage({ type: "success", text: data.message });
+        router.push(`/password-verify?email=${encodeURIComponent(email)}`);
+      } else {
+        setGlobalMessage({ type: "error", text: data.message });
+      }
+    } catch (err) {
+      setGlobalMessage({
+        type: "error",
+        text: "Network error. Please try again.",
+      });
+>>>>>>> clean-reset
     } finally {
       setIsLoading(false);
     }
@@ -184,7 +209,11 @@ export default function ForgotPassword() {
                 border border-gray-300 px-4 py-2 rounded-full flex items-center justify-center gap-4 transition-colors duration-150 text-gray-700
                 ${
                   isLoading
+<<<<<<< HEAD
                     ? "bg-gray-100 cursor-not-allowed opacity-50 pointer-events-none"
+=======
+                    ? "bg-gray-100 cursor-not-allowed pointer-events-none"
+>>>>>>> clean-reset
                     : "hover:bg-gray-50 active:bg-gray-100 cursor-pointer"
                 }
               `}

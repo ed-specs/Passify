@@ -2,8 +2,11 @@
 
 import { useState, useMemo, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation"; // Added useSearchParams
+<<<<<<< HEAD
 import { auth } from "@/app/config/firebase";
 import { confirmPasswordReset } from "firebase/auth"; // CRITICAL Firebase function
+=======
+>>>>>>> clean-reset
 import {
   MessageCircleWarning,
   CircleCheckBig,
@@ -17,9 +20,13 @@ export default function ResetPassword() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
+<<<<<<< HEAD
   // Get the oobCode (Action Code) from the URL, which is needed to reset the password
   const oobCode = searchParams.get("oobCode");
 
+=======
+  // Get the token (Action Code) from the URL, which is needed to reset the password
+>>>>>>> clean-reset
   // --- STATE MANAGEMENT ---
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -34,6 +41,7 @@ export default function ResetPassword() {
     text: "",
   });
 
+<<<<<<< HEAD
   // Check if the oobCode is missing on load
   useEffect(() => {
     if (!oobCode) {
@@ -45,6 +53,25 @@ export default function ResetPassword() {
       setIsLoading(true); // Disable form since we can't proceed
     }
   }, [oobCode]);
+=======
+  const token = searchParams.get("token");
+
+  useEffect(() => {
+    // Avoid triggering until the client-side router is ready
+    if (typeof window === "undefined") return;
+
+    if (!token) {
+      setGlobalMessage({
+        type: "error",
+        text:
+          "Invalid or missing password reset token. Please start the process again.",
+      });
+      setIsLoading(false);
+    } else {
+      setGlobalMessage({ type: "", text: "" });
+    }
+  }, [searchParams]);
+>>>>>>> clean-reset
 
   // --- HANDLERS ---
   const handleInputChange = (e) => {
@@ -112,6 +139,7 @@ export default function ResetPassword() {
   // --- SUBMISSION LOGIC (The New Core) ---
   const handleSubmit = async (e) => {
     e.preventDefault();
+<<<<<<< HEAD
     setGlobalMessage({ type: "", text: "" });
 
     if (!oobCode || !validateForm()) {
@@ -126,10 +154,21 @@ export default function ResetPassword() {
           text: "Please correct the errors before resetting.",
         });
       }
+=======
+    const isValid = validateForm();
+    if (!isValid) return;
+
+    if (!token) {
+      setGlobalMessage({
+        type: "error",
+        text: "Missing or invalid reset token.",
+      });
+>>>>>>> clean-reset
       return;
     }
 
     setIsLoading(true);
+<<<<<<< HEAD
 
     try {
       // 🔑 CRITICAL FIREBASE STEP: Confirms the reset code and updates the password
@@ -163,6 +202,30 @@ export default function ResetPassword() {
       }
 
       setGlobalMessage({ type: "error", text: errorMessage });
+=======
+    try {
+      const res = await fetch("/api/auth/reset-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token, newPassword: password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.message || "Reset failed");
+
+      setGlobalMessage({
+        type: "success",
+        text: "Password updated! Redirecting to login...",
+      });
+
+      setTimeout(() => router.push("/login"), 3000);
+    } catch (err) {
+      setGlobalMessage({
+        type: "error",
+        text: err.message || "An error occurred during password reset.",
+      });
+>>>>>>> clean-reset
     } finally {
       setIsLoading(false);
     }
@@ -172,13 +235,21 @@ export default function ResetPassword() {
   const getBorderClass = (fieldName) =>
     errors[fieldName]
       ? "border-red-500 focus:border-red-500"
+<<<<<<< HEAD
       : isLoading || !oobCode
+=======
+      : isLoading || !token
+>>>>>>> clean-reset
       ? "border-gray-300" // Disabled border
       : "border-gray-300 focus:border-blue-500"; // Normal border
 
   const getInputClasses = (fieldName) => `
     px-3 sm:px-4 py-2 w-full rounded-md border outline-none transition-colors duration-150 placeholder:text-gray-500
+<<<<<<< HEAD
     ${isLoading || !oobCode ? "bg-gray-100 cursor-not-allowed" : ""}
+=======
+    ${isLoading || !token ? "bg-gray-100 cursor-not-allowed" : ""}
+>>>>>>> clean-reset
     ${getBorderClass(fieldName)}
   `;
 
@@ -233,17 +304,29 @@ export default function ResetPassword() {
                 }}
                 className={`${getInputClasses("password")} pr-10`}
                 placeholder="Enter your password"
+<<<<<<< HEAD
                 disabled={isLoading || !oobCode}
+=======
+                disabled={isLoading || !token}
+>>>>>>> clean-reset
               />
               <button
                 type="button"
                 onClick={togglePasswordVisibility}
                 className={`absolute top-2 sm:top-2.5 right-3 sm:right-4 text-gray-500 transition-colors duration-150 ${
+<<<<<<< HEAD
                   isLoading || !oobCode
                     ? "bg-gray-100 cursor-not-allowed"
                     : "hover:text-blue-600"
                 }`}
                 disabled={isLoading || !oobCode}
+=======
+                  isLoading || !token
+                    ? "bg-gray-100 cursor-not-allowed"
+                    : "hover:text-blue-600"
+                }`}
+                disabled={isLoading || !token}
+>>>>>>> clean-reset
               >
                 {showPassword ? (
                   <Eye className="size-5" />
@@ -332,17 +415,29 @@ export default function ResetPassword() {
                 onChange={handleInputChange}
                 className={`${getInputClasses("confirmPassword")} pr-10`}
                 placeholder="Re-enter your password"
+<<<<<<< HEAD
                 disabled={isLoading || !oobCode}
+=======
+                disabled={isLoading || !token}
+>>>>>>> clean-reset
               />
               <button
                 type="button"
                 onClick={toggleConfirmPasswordVisibility}
                 className={`absolute top-2 sm:top-2.5 right-3 sm:right-4 text-gray-500 transition-colors duration-150 ${
+<<<<<<< HEAD
                   isLoading || !oobCode
                     ? "bg-gray-100 cursor-not-allowed"
                     : "hover:text-blue-600"
                 }`}
                 disabled={isLoading || !oobCode}
+=======
+                  isLoading || !token
+                    ? "bg-gray-100 cursor-not-allowed"
+                    : "hover:text-blue-600"
+                }`}
+                disabled={isLoading || !token}
+>>>>>>> clean-reset
               >
                 {showConfirmPassword ? (
                   <Eye className="size-5" />
@@ -362,11 +457,19 @@ export default function ResetPassword() {
           <div className="flex flex-col gap-2 mt-1">
             <button
               type="submit"
+<<<<<<< HEAD
               disabled={isLoading || !oobCode}
               className={`
                 transition-colors duration-150 rounded-full px-4 py-2 text-center text-white mt-2 cursor-pointer flex items-center justify-center gap-2
                 ${
                   isLoading || !oobCode
+=======
+              disabled={isLoading || !token}
+              className={`
+                transition-colors duration-150 rounded-full px-4 py-2 text-center text-white mt-2 cursor-pointer flex items-center justify-center gap-2
+                ${
+                  isLoading || !token
+>>>>>>> clean-reset
                     ? "bg-blue-700/70 border-blue-700/70 cursor-not-allowed"
                     : "bg-blue-500 border-blue-500 hover:bg-blue-500/90 active:bg-blue-600 hover:border-blue-500/90 active:border-blue-600"
                 }
@@ -380,13 +483,22 @@ export default function ResetPassword() {
               className={`
                 border border-gray-300 px-4 py-2 rounded-full flex items-center justify-center gap-4 transition-colors duration-150 text-gray-700
                 ${
+<<<<<<< HEAD
                   isLoading || !oobCode
+=======
+                  isLoading || !token
+>>>>>>> clean-reset
                     ? "bg-gray-100 cursor-not-allowed opacity-50 pointer-events-none"
                     : "hover:bg-gray-50 active:bg-gray-100 cursor-pointer"
                 }
               `}
+<<<<<<< HEAD
               aria-disabled={isLoading || !oobCode}
               tabIndex={isLoading || !oobCode ? -1 : 0}
+=======
+              aria-disabled={isLoading || !token}
+              tabIndex={isLoading || !token ? -1 : 0}
+>>>>>>> clean-reset
             >
               <span>Back to login</span>
             </Link>

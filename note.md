@@ -18,3 +18,16 @@ email-verification:
 
 sign-in:
     - implement sign-in with google (underdeveloped)
+<<<<<<< HEAD
+=======
+
+reset-password
+    - created firebase admin
+    - created an API Route for sending reset code in user's email
+    - created an API route to verify the reset code
+    - install jsonwebtoken
+    - generated a token and placed it inside the .env.local
+    - implemented reset password function
+
+    
+>>>>>>> clean-reset
